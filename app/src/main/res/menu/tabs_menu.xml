@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/tab_hospital_list"
+        android:icon="@drawable/ic_tab_hospital_list"
+        android:title="Hospitais" />
+
+    <item
+        android:id="@+id/tab_map"
+        android:icon="@drawable/ic_tab_map"
+        android:title="Mapa" />
+
+    <item
+        android:id="@+id/tab_hospital_form"
+        android:icon="@drawable/ic_tab_hospital_form"
+        android:title="Pesquisa" />
+
+    <item
+        android:id="@+id/tab_hospital_history"
+        android:icon="@drawable/ic_tab_hospital_history"
+        android:title="Histórico" />
+
+</menu>
