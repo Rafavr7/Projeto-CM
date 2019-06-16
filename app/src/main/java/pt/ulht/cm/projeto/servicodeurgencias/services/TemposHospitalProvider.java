@@ -40,7 +40,7 @@ public class TemposHospitalProvider extends HospitalProviderAbstract {
         temposAPIService = retrofit.create(TemposAPIService.class);
     }
 
-    public void searchHospitalAsync() {
+    public void searchHospitalsAsync() {
         Call<HospitalSearchResponse> call = temposAPIService.searchHospitals();
 
         call.enqueue(new Callback<HospitalSearchResponse>() {

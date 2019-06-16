@@ -1,5 +1,21 @@
 <resources>
-    <string name="app_name">Servico de Urgencias</string>
+    <string name="app_name">Serviço de Urgências</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+
+    <string name="hospital_list_item_name_placeholder">Hospital Santa Maria</string>
+    <string name="hospital_list_item_address_placeholder">Av. Prof. Egas Moniz 1649-035 Lisboa</string>
+    <string name="hospital_list_item_distance_placeholder">33km</string>
+    <string name="hospital_list_item_details_text">Mais detalhes ></string>
+
+    <string name="hospital_detail_name_placeholder">Hospital Santa Maria</string>
+    <string name="hospital_detail_distance_placeholder">5.5 Km</string>
+    <string name="tetxView_hospital_detail_address_label_text">Morada</string>
+    <string name="textView_hospital_detail_address_placeholder">Av. Prof. Egas Moniz 1649-035 Lisboa</string>
+    <string name="tetxView_hospital_detail_phone_label_text">Telefone</string>
+    <string name="textView_hospital_detail_phone_placeholder">213585684</string>
+    <string name="tetxView_hospital_detail_email_label_text">E-Mail</string>
+    <string name="textView_hospital_detail_email_placeholder">santaMaria@min-saude.pt</string>
+    <string name="tetxView_hospital_detail_webSite_label_text">Web Site</string>
+    <string name="textView_hospital_detail_webSite_placeholder">www.santamaria.gov.pt</string>
 </resources>
