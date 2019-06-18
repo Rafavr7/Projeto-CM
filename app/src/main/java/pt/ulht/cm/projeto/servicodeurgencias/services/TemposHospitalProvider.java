@@ -1,6 +1,10 @@
 package pt.ulht.cm.projeto.servicodeurgencias.services;
 
+import android.location.Location;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import pt.ulht.cm.projeto.servicodeurgencias.model.Hospital;
@@ -30,6 +34,7 @@ public class TemposHospitalProvider extends HospitalProviderAbstract {
 
     public static final String TEMPOS_API_BASE_URL = "http://tempos.min-saude.pt/api.php/";
     private TemposAPIService temposAPIService;
+    private Location userLocation;
 
     private void init() {
         Retrofit retrofit = new Retrofit.Builder()
@@ -48,6 +53,10 @@ public class TemposHospitalProvider extends HospitalProviderAbstract {
             public void onResponse(Call<HospitalSearchResponse> call, Response<HospitalSearchResponse> response) {
                 List<Hospital> hospitals = response.body().getHospitals();
                 hospitalData = hospitals;
+                calculateDistance();
+
+                // Sort hospitals by their distance attribute to show the user the closest hospitals first
+                sortHospitalsByDIstance();
                 notifyObserverDataChanged();
             }
 
@@ -58,14 +67,28 @@ public class TemposHospitalProvider extends HospitalProviderAbstract {
         });
     }
 
+    public void calculateDistance() {
+        double lat = userLocation.getLatitude();
+        double lon = userLocation.getLongitude();
+
+        if(userLocation != null && hospitalData != null) {
+            for(Hospital h : hospitalData) {
+                h.setDistance(h.calculateDistance(lat, lon));
+            }
+        }
+    }
+
+    public void sortHospitalsByDIstance() {
+        Collections.sort(hospitalData, new Comparator<Hospital>() {
+            @Override
+            public int compare(Hospital h1, Hospital h2) {
+                return (int) (h1.getDistance() - h2.getDistance());
+            }
+        });
+    }
 
     public List<Hospital> getHospitals() {
         return hospitalData;
-    }
-
-    public void clear() {
-        hospitalData = new ArrayList<>();
-        notifyObserverDataChanged();
     }
 
     @Override
@@ -77,5 +100,13 @@ public class TemposHospitalProvider extends HospitalProviderAbstract {
         }
 
         return null;
+    }
+
+    public Location getUserLocation() {
+        return userLocation;
+    }
+
+    public void setUserLocation(Location location) {
+        userLocation = location;
     }
 }

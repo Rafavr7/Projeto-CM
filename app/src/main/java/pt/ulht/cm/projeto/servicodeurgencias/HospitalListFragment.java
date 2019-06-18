@@ -1,7 +1,14 @@
 package pt.ulht.cm.projeto.servicodeurgencias;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +20,16 @@ import android.view.ViewGroup;
 
 import pt.ulht.cm.projeto.servicodeurgencias.services.TemposHospitalProvider;
 
+import static android.content.Context.LOCATION_SERVICE;
+
 public class HospitalListFragment extends Fragment {
+    private static final int LOCATION_REFRESH_TIME = 1;
+    private static final float LOCATION_REFRESH_DISTANCE = 1;
+
     private TemposHospitalProvider hospitalProvider;
     private HospitalListAdapter hospitalAdapter;
+    private LocationManager locationManager;
+    //private Location userLocation;
 
     public HospitalListFragment() {
         // To leave empty
@@ -48,8 +62,16 @@ public class HospitalListFragment extends Fragment {
         DividerItemDecoration itemDecoration = new DividerItemDecoration(hospitalRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
         hospitalRecyclerView.addItemDecoration(itemDecoration);
 
-        // CHECK FOR USER LOCATION PERMISSION AND STUFF
-        // ...
+        // Get location from the user and initialize its Manager
+
+        locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        if((ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                && (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
+
+            Log.d("LOCATION_PERMISSION", "Permission denied...");
+        }
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOCATION_REFRESH_TIME, LOCATION_REFRESH_DISTANCE, locationListener);
+
 
         hospitalProvider = TemposHospitalProvider.getInstance();
         hospitalProvider.searchHospitalsAsync();
@@ -63,5 +85,27 @@ public class HospitalListFragment extends Fragment {
         return view;
     }
 
-    // A PARTIR DAQUI FAZER O LOCATION LISTENER
+    private final LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(final Location location) {
+            hospitalProvider.setUserLocation(location);
+            hospitalProvider.calculateDistance();
+            Log.d("LOCATION_LISTENER", "Lat: " + location.getLatitude() + ", Lon: " + location.getLongitude());
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 }

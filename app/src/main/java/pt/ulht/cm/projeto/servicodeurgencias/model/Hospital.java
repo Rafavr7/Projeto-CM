@@ -1,8 +1,14 @@
 package pt.ulht.cm.projeto.servicodeurgencias.model;
 
+import android.location.Location;
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 public class Hospital {
+    private static final int EARTH_RADIUS = 6371;
+    private static final int HEIGHT = 0;
+
     /** Attributes provided by the API **/
     @SerializedName("Id") private int id;
     @SerializedName("Name") private String name;
@@ -33,8 +39,6 @@ public class Hospital {
         this.email = email;
         this.webSite = webSite;
         this.hasEmergency = hasEmergency;
-        distance = 5.2;
-        //calculateDistance()
     }
 
     public String getName() {
@@ -117,9 +121,42 @@ public class Hospital {
         this.distance = distance;
     }
 
+    public double calculateDistance(double userLatitude, double userLongitude) {
+        /*double c1Squared = Math.pow(getLatitude() - userLocation.getLatitude(), 2);
+        double c2Squared = Math.pow(getLongitude() - userLocation.getLongitude(), 2);
+        double h = Math.sqrt(c1Squared + c2Squared);*/
+        double distLat = Math.toRadians(userLatitude - latitude);
+        double distLon = Math.toRadians(userLongitude - longitude);
+
+        double a = Math.sin(distLat / 2) * Math.sin(distLat * 2) +
+                Math.cos(Math.toRadians(latitude)) * Math.cos(Math.toRadians(userLatitude)) *
+                Math.sin(distLon / 2) * Math.sin(distLon / 2);
+
+        double b = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        // Convert to human units
+        double c = EARTH_RADIUS * b;
+
+        double returnDist = Math.pow(c, 2) + Math.pow(HEIGHT, 2);
+        return Math.sqrt(returnDist);
+    }
+
     public String getDistanceTextView() {
-        // TODO
-        return "5.2 Km";
+        if(distance < 1) {
+            int meters = (int) (10 * distance);
+            String distanceView = meters + "0 metros";
+            return distanceView;
+        }
+        else if(distance >= 100) {
+            String km = String.format("%.0f", distance);
+            km += " Km";
+            Log.d("DISTANCE_TEXT_VIEW", "Hospital ID: " + id + ", Distance: " + km + ", From: " + distance);
+            return km;
+        }
+
+        String km = String.format("%.1f", distance);
+        km += " Km";
+        Log.d("DISTANCE_TEXT_VIEW", "Hospital ID: " + id + ", Distance: " + km + ", From: " + distance);
+        return km;
     }
 
     @Override

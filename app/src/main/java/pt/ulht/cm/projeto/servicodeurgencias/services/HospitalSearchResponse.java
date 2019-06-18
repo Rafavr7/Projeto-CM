@@ -13,8 +13,4 @@ public class HospitalSearchResponse {
     public List<Hospital> getHospitals() {
         return hospitals;
     }
-
-    public void setHospitals(List<Hospital> hospitals) {
-        this.hospitals = hospitals;
-    }
 }
