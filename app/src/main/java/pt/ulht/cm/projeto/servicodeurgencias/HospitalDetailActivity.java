@@ -3,8 +3,10 @@ package pt.ulht.cm.projeto.servicodeurgencias;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -49,6 +51,20 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
             hospitalWebSite.setText(hospital.getWebSite());
             hospitalDistance.setText(hospital.getDistanceTextView());
         }
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -113,5 +129,11 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
     @Override
     public void updateData(List<Hospital> hospitals) {
         // TODO
+    }
+
+    public void doCheckIn(View view) {
+    }
+
+    public void doGoing(View view) {
     }
 }

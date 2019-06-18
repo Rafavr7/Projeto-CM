@@ -18,4 +18,20 @@
     <string name="textView_hospital_detail_email_placeholder">santaMaria@min-saude.pt</string>
     <string name="tetxView_hospital_detail_webSite_label_text">Web Site</string>
     <string name="textView_hospital_detail_webSite_placeholder">www.santamaria.gov.pt</string>
+    <string name="text_view_hospital_queue_nao_grave_label">Queue Não Grave</string>
+    <string name="text_view_hospital_queue_grave_label">Queue Grave</string>
+    <string name="hospital_queue_grave_placeholder">Grave Placeholder</string>
+    <string name="hospital_queue_nao_grave_placeholder">Não grave placeholder</string>
+
+    <string name="radio_nao_grave">Não Grave</string>
+    <string name="radio_grave">Grave</string>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCeUxyK5YgXl5_8cFnmfOZm-4iyj5XZcA0</string>
+
+    <string-array name="tipos_urgencia">
+        <item>Geral</item>
+        <item>Pediatria</item>
+        <item>Obstetrícia</item>
+    </string-array>
+
 </resources>
