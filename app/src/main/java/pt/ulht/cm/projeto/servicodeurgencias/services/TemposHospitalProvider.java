@@ -82,7 +82,14 @@ public class TemposHospitalProvider extends HospitalProviderAbstract {
         Collections.sort(hospitalData, new Comparator<Hospital>() {
             @Override
             public int compare(Hospital h1, Hospital h2) {
-                return (int) (h1.getDistance() - h2.getDistance());
+                if(h1.getDistance() < h2.getDistance()) {
+                    return -1;
+                }
+                else if(h1.getDistance() > h2.getDistance()) {
+                    return 1;
+                }
+
+                return 0;
             }
         });
     }

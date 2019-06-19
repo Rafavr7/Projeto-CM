@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Collection;
 import java.util.List;
 
 import pt.ulht.cm.projeto.servicodeurgencias.model.IHospitalProvider;
@@ -14,6 +15,7 @@ import pt.ulht.cm.projeto.servicodeurgencias.model.Hospital;
 public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapter.ViewHolder> implements IHospitalProvider.HospitalProviderObserver {
 
     private List<Hospital> hospitalDataSet;
+    private List<Hospital> filteredHospitalList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final View hospitalView;
@@ -70,4 +72,5 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
         hospitalDataSet = newDataSet;
         notifyDataSetChanged();
     }
+
 }

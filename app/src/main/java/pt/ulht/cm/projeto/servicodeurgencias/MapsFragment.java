@@ -86,7 +86,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
         // TODO Move camera to actual position
         // LatLng newLatLng = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
 
-        // map.moveCamera(CameraUpdateFactory.newLatLngZoom());
+        // map.moveCamera(CameraUpdateFactory.newLatLngZoom(newLatLng, 8));
     }
 
     @Override

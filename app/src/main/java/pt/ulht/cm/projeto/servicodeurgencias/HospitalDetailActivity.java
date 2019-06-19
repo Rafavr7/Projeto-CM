@@ -136,4 +136,7 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
 
     public void doGoing(View view) {
     }
+
+    public void doCheckOut(View view) {
+    }
 }

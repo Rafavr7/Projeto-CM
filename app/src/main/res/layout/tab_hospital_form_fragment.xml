@@ -108,4 +108,18 @@
 
     </android.support.v7.widget.CardView>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cardView_hospital_form">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_hospital_form_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </ScrollView>
+
 </RelativeLayout>
