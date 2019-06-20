@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import pt.ulht.cm.projeto.servicodeurgencias.model.Hospital;
 import pt.ulht.cm.projeto.servicodeurgencias.model.IHospitalProvider;
+import pt.ulht.cm.projeto.servicodeurgencias.model.WaitingTime.WaitingTime;
 import pt.ulht.cm.projeto.servicodeurgencias.services.TemposHospitalProvider;
 
 public class HospitalDetailActivity extends AppCompatActivity implements IHospitalProvider.HospitalProviderObserver {
@@ -21,8 +23,12 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
     public static String HOSPITAL_ID = "pt.ulht.cm.projeto.servicodeurgencias.HOSPITAL_ID_EXTRA";
 
     private Hospital hospital;
+    private List<WaitingTime> hospitalWaitingTimes;
     private TextView hospitalName, hospitalAddress, hospitalPhone, hospitalMail, hospitalWebSite,
-                     hospitalDistance;
+                     hospitalDistance, hospitalWaitingTimeGeneral, hospitalWaitingTimePeds,
+                     hospitalWaitingTimeObstetrics;
+
+    private TemposHospitalProvider hospitalProvider;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -37,11 +43,17 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
         hospitalWebSite = (TextView) this.findViewById(R.id.textView_hospital_detail_webSite);
         hospitalDistance = (TextView) this.findViewById(R.id.textView_hospital_detail_distance);
 
+        hospitalWaitingTimeGeneral = (TextView) this.findViewById(R.id.textViewHospitalDetailQueueGeralTime);
+        hospitalWaitingTimePeds = (TextView) this.findViewById(R.id.textViewHospitalDetailQueuePediatriaTime);
+        hospitalWaitingTimeObstetrics = (TextView) this.findViewById(R.id.textViewHospitalDetailQueueObstetriaTime);
+
+
         final String hospitalID = this.getIntent().getStringExtra(HospitalDetailActivity.HOSPITAL_ID);
         Log.d("CREATE_DETAIL", "Detail with id passed: " + hospitalID);
         if(hospitalID != null) {
+            hospitalProvider = TemposHospitalProvider.getInstance();
             // Find hospital
-            hospital = TemposHospitalProvider.getInstance().getHospital(Integer.parseInt(hospitalID));
+            hospital = hospitalProvider.getHospital(Integer.parseInt(hospitalID));
 
             // Populate UI with found hospital data
             hospitalName.setText(hospital.getName());
@@ -50,12 +62,30 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
             hospitalMail.setText(hospital.getEmail());
             hospitalWebSite.setText(hospital.getWebSite());
             hospitalDistance.setText(hospital.getDistanceTextView());
+
+            if(hospital.isSharingStandbyTimes()) {
+                hospitalProvider.getHospitalWaitingTimesAsync(hospital.getId());
+                hospitalWaitingTimes = hospital.getWaitingTimes();
+                Log.d("GET_WAITING_TIME", "Waiting Time: " + hospitalWaitingTimes);
+                hospitalProvider.addObserver(this);
+            }
+            else {
+                Toast.makeText(this, "Falha ao obter tempos de espera...", Toast.LENGTH_LONG).show();
+            }
+
+            fillWaitingTimes();
         }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    private void fillWaitingTimes() {
+        hospitalWaitingTimeGeneral.setText(hospital.getUrgencyWaitingTimeTextView("Geral"));
+        hospitalWaitingTimePeds.setText(hospital.getUrgencyWaitingTimeTextView("Pediatrica"));
+        hospitalWaitingTimeObstetrics.setText(hospital.getUrgencyWaitingTimeTextView("Obstetrica"));
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -128,7 +158,14 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
 
     @Override
     public void updateData(List<Hospital> hospitals) {
-        // TODO
+        Log.d("FUNCTION_CALL", "HospitalDetailActivity.upadetData was called");
+        for(Hospital h : hospitals) {
+            if(h.getId() == hospital.getId()) {
+                hospitalWaitingTimes = h.getWaitingTimes();
+            }
+        }
+
+        fillWaitingTimes();
     }
 
     public void doCheckIn(View view) {

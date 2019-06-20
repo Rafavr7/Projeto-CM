@@ -6,7 +6,7 @@
     <string name="hospital_list_item_name_placeholder">Hospital Santa Maria</string>
     <string name="hospital_list_item_address_placeholder">Av. Prof. Egas Moniz 1649-035 Lisboa</string>
     <string name="hospital_list_item_distance_placeholder">33km</string>
-    <string name="hospital_list_item_details_text">Mais detalhes ></string>
+    <string name="hospital_list_item_details_text">Detalhes ></string>
 
     <string name="hospital_detail_name_placeholder">Hospital Santa Maria</string>
     <string name="hospital_detail_distance_placeholder">5.5 Km</string>
@@ -18,10 +18,12 @@
     <string name="textView_hospital_detail_email_placeholder">santaMaria@min-saude.pt</string>
     <string name="tetxView_hospital_detail_webSite_label_text">Web Site</string>
     <string name="textView_hospital_detail_webSite_placeholder">www.santamaria.gov.pt</string>
-    <string name="text_view_hospital_queue_obsteatria_label">Queue Obsteatria</string>
-    <string name="text_view_hospital_queue_pediatria_label">Queue Pediatria</string>
-    <string name="text_view_hospital_queue_geral_label">Queue Geral</string>
-    <string name="hospital_queue_grave_placeholder">12min</string>
+
+    <string name="text_view_hospital_queue_obsteatria_label">Obstétrica</string>
+    <string name="text_view_hospital_queue_geral_label">Geral</string>
+    <string name="text_view_hospital_queue_pediatria_label">Pediátrica</string>
+    <string name="text_view_hospital_queue_type_label">Tipo</string>
+    <string name="hospital_queue_time_label">Tempo</string>
     <string name="hospital_queue_nao_grave_placeholder">42min</string>
 
     <string name="radio_nao_grave">Não Grave</string>

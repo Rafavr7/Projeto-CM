@@ -50,9 +50,9 @@
                     <ImageView
                         android:id="@+id/imageView_hospital_detail_photo"
                         android:layout_width="wrap_content"
-                        android:layout_height="200dp"
+                        android:layout_height="50dp"
                         android:padding="2dp"
-                        android:src="@drawable/hospital_detail_cover_image"
+                        android:src="@drawable/redcross"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -111,23 +111,54 @@
                         android:paddingBottom="2dp">
 
                         <TextView
+                            android:id="@+id/textViewHospitalDetailQueueTipoLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_view_hospital_queue_type_label"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/textViewHospitalDetailQueueTimeLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="@string/hospital_queue_time_label"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginVertical="5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="2dp">
+
+                        <TextView
                             android:id="@+id/textViewHospitalDetailQueueGeralLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/text_view_hospital_queue_geral_label"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16dp" />
+                            android:textSize="18dp"
+                            android:textStyle="bold"/>
 
                         <TextView
-                            android:id="@+id/textViewHospitalDetailQueueGeral"
+                            android:id="@+id/textViewHospitalDetailQueueGeralTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="@string/hospital_queue_grave_placeholder"
+                            android:text="@string/hospital_queue_nao_grave_placeholder"
                             android:textColor="@color/colorRed"
-                            android:textSize="22dp"
+                            android:textSize="18dp"
                             android:textStyle="bold" />
-
                     </LinearLayout>
 
                     <View
@@ -148,16 +179,17 @@
                             android:layout_height="wrap_content"
                             android:text="@string/text_view_hospital_queue_pediatria_label"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16dp" />
+                            android:textSize="18dp"
+                            android:textStyle="bold"/>
 
                         <TextView
-                            android:id="@+id/textViewHospitalDetailQueuePediatria"
+                            android:id="@+id/textViewHospitalDetailQueuePediatriaTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="@string/hospital_queue_nao_grave_placeholder"
+                            android:text="35min"
                             android:textColor="@color/colorRed"
-                            android:textSize="22dp"
+                            android:textSize="18dp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -174,21 +206,22 @@
                         android:paddingTop="2dp">
 
                         <TextView
-                            android:id="@+id/textViewHospitalDetailQueueObsteatriaLabel"
+                            android:id="@+id/textViewHospitalDetailQueueObstetriaLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/text_view_hospital_queue_obsteatria_label"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="16dp" />
+                            android:textSize="18dp"
+                            android:textStyle="bold"/>
 
                         <TextView
-                            android:id="@+id/textViewHospitalDetailQueueObsteatria"
+                            android:id="@+id/textViewHospitalDetailQueueObstetriaTime"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="right"
-                            android:text="@string/text_view_hospital_queue_obsteatria_placeholder"
+                            android:text="15min"
                             android:textColor="@color/colorRed"
-                            android:textSize="22dp"
+                            android:textSize="18dp"
                             android:textStyle="bold" />
                     </LinearLayout>
 
@@ -306,7 +339,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="2dp"
+                    android:layout_marginRight=".5dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/colorPrimary"
                     android:text="On My Way"
@@ -319,8 +352,8 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft=".5dp"
+                    android:layout_marginRight=".5dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/colorPrimary"
                     android:text="Check In"
@@ -333,7 +366,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
+                    android:layout_marginLeft=".5dp"
                     android:layout_marginTop="5dp"
                     android:background="@color/colorPrimary"
                     android:text="Check Out"

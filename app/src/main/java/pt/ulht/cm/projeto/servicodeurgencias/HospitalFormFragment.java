@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,10 @@ public class HospitalFormFragment extends Fragment {
                 selectedButton = view.findViewById(selectedId);
                 String radioText = (String) selectedButton.getText();
 
-                 // hospitals.filter
+                Log.d("SEARCH_HOSPITAL", "Urgência: " + textSpinner + ", Gravidade: " + radioText
+                        + ", Radio Option: " + selectedId);
+
+
             }
         });
 

@@ -46,8 +46,8 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
         // Replace the contents of the view with that element
         Hospital temp = hospitalDataSet.get(position);
 
-        holder.textViewHospitalName.setText(temp.getName());
-        holder.textViewHospitalAddress.setText(temp.getAddress());
+        holder.textViewHospitalName.setText(temp.getListAdapterName());
+        holder.textViewHospitalAddress.setText(temp.getListAdapterAddress());
         holder.textViewHospitalDistance.setText(temp.getDistanceTextView());
 
         holder.hospitalView.setOnClickListener(new HospitalListFragment.RecyclerViewItemClickListener( temp.getId()) );

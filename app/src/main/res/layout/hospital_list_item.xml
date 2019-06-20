@@ -29,7 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?attr/textAppearanceListItemSecondary"
-                android:text="@string/hospital_list_item_address_placeholder"/>
+                android:text="@string/hospital_list_item_address_placeholder"
+                android:paddingLeft="18dp"/>
 
         </LinearLayout>
 
@@ -44,6 +45,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="0"
+                android:paddingTop="18dp"
+                android:paddingRight="10dp"
                 android:gravity="end"
                 android:text="@string/hospital_list_item_distance_placeholder"
                 android:textAppearance="?attr/textAppearanceListItemSecondary"/>
@@ -54,7 +57,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="bottom"
-                android:layout_marginBottom="5dp"
+                android:layout_gravity="end"
+                android:layout_marginBottom="2dp"
+                android:paddingRight="10dp"
                 android:text="@string/hospital_list_item_details_text"
                 android:textSize="10dp"/>
 

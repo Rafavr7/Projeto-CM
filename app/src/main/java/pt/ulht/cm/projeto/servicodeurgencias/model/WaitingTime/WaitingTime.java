@@ -12,14 +12,14 @@ public class WaitingTime {
     @SerializedName("Emergency") private Emergency emergency;
 
 
-    public int getTotalTime() {
+    public int getAverageTime() {
         int totalTime = blue.getWaitingTimeInSeconds() +
                         green.getWaitingTimeInSeconds() +
                         yellow.getWaitingTimeInSeconds() +
                         orange.getWaitingTimeInSeconds() +
                         red.getWaitingTimeInSeconds();
 
-        return totalTime;
+        return totalTime / 5;
     }
 
     public EmergencyQueue getBlue() {

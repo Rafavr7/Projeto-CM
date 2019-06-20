@@ -1,6 +1,8 @@
 package pt.ulht.cm.projeto.servicodeurgencias.services;
 
 import android.location.Location;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,6 +11,7 @@ import java.util.List;
 
 import pt.ulht.cm.projeto.servicodeurgencias.model.Hospital;
 import pt.ulht.cm.projeto.servicodeurgencias.model.HospitalProviderAbstract;
+import pt.ulht.cm.projeto.servicodeurgencias.model.WaitingTime.WaitingTime;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -63,6 +66,31 @@ public class TemposHospitalProvider extends HospitalProviderAbstract {
             @Override
             public void onFailure(Call<HospitalSearchResponse> call, Throwable t) {
                 // EMPTY
+            }
+        });
+    }
+
+    public void getHospitalWaitingTimesAsync(final int hospitalID) {
+        String id = String.valueOf(hospitalID);
+        Log.d("GET_WAITING_TIMES", "Find times for ID: " + id);
+        Call<HospitalWaitingTimesResponse> call = temposAPIService.getWaitingTimes(id);
+
+        call.enqueue(new Callback<HospitalWaitingTimesResponse>() {
+            @Override
+            public void onResponse(Call<HospitalWaitingTimesResponse> call, Response<HospitalWaitingTimesResponse> response) {
+                List<WaitingTime> waitingTimes = response.body().getWaitingTimes();
+                Log.d("RETROFIT,search", "Number of times received: " + (waitingTimes != null ? waitingTimes.size() : 0));
+                getHospital(hospitalID).setWaitingTimes(waitingTimes);
+
+                notifyObserverDataChanged();
+            }
+
+            @Override
+            public void onFailure(Call<HospitalWaitingTimesResponse> call, Throwable t) {
+                Log.d("WAITING_TIMES_FAILURE", "Failed to get Waiting Times from the API " +
+                        "for the hospital with id " + hospitalID);
+
+                notifyObserverDataChanged();
             }
         });
     }

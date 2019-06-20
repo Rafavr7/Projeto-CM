@@ -16,7 +16,7 @@ public interface TemposAPIService {
     @GET("institution")
     Call<HospitalSearchResponse> searchHospitals();
 
-    /*@GET("standbyTime/{ID}")
-    Call<StandbyTimeSearchResponse> getStandbyTimes(@Path("ID") String hospitalID);*/
+    @GET("standbyTime/{ID}")
+    Call<HospitalWaitingTimesResponse> getWaitingTimes(@Path("ID") String hospitalID);
 
 }
