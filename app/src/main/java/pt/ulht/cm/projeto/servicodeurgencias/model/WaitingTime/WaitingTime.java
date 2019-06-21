@@ -22,6 +22,15 @@ public class WaitingTime {
         return totalTime / 5;
     }
 
+
+    public boolean hasGrave(){
+        return yellow != null || orange != null || red != null;
+    }
+
+    public boolean hasNotGrave(){
+        return blue != null || green != null;
+    }
+
     public EmergencyQueue getBlue() {
         return blue;
     }

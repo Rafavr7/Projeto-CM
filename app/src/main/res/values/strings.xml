@@ -40,8 +40,8 @@
 
     <string-array name="tipos_urgencia">
         <item>Geral</item>
-        <item>Pediatria</item>
-        <item>Obstetrícia</item>
+        <item>Pediatrica</item>
+        <item>Obstetrica</item>
     </string-array>
 
 </resources>

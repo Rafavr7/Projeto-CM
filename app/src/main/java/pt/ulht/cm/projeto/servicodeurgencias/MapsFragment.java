@@ -37,7 +37,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
     private List<Hospital> hospitals;
     private GoogleMap map;
     private Location userLocation;
-    private LocationRequest locationRequest;
+    private TemposHospitalProvider temposHospitalProvider;
 
     public MapsFragment(){
         // Empty
@@ -84,9 +84,11 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
             Log.d("MapsFragment", "Hospitals return null");
         }
         // TODO Move camera to actual position
-        // LatLng newLatLng = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
 
-        // map.moveCamera(CameraUpdateFactory.newLatLngZoom(newLatLng, 8));
+        userLocation = TemposHospitalProvider.getInstance().getUserLocation();
+        LatLng newLatLng = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
+
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(newLatLng, 12));
     }
 
     @Override

@@ -52,6 +52,10 @@ public class Hospital {
         this.hasEmergency = hasEmergency;
     }
 
+    public static String[] getUrgencyTypes() {
+        return URGENCY_TYPES;
+    }
+
     public String getName() {
         return name;
     }
@@ -143,6 +147,7 @@ public class Hospital {
                 calculateWaitingTime(type);
             }
         }
+        // Log.d("SET WAITING TIMES DEBUG", waitingTimes.toString());
     }
 
     public boolean isSharingStandbyTimes() {

@@ -61,12 +61,12 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
             hospital = hospitalProvider.getHospital(Integer.parseInt(hospitalID));
 
             // Populate UI with found hospital data
-            hospitalName.setText(hospital.getName());
-            hospitalAddress.setText(hospital.getAddress());
-            hospitalPhone.setText(hospital.getPhone());
-            hospitalMail.setText(hospital.getEmail());
-            hospitalWebSite.setText(hospital.getWebSite());
-            hospitalDistance.setText(hospital.getDistanceTextView());
+            hospitalName.setText(this.hospital.getName());
+            hospitalAddress.setText(this.hospital.getAddress());
+            hospitalPhone.setText(this.hospital.getPhone());
+            hospitalMail.setText(this.hospital.getEmail());
+            hospitalWebSite.setText(this.hospital.getWebSite());
+            hospitalDistance.setText(this.hospital.getDistanceTextView());
 
             if(hospital.isSharingStandbyTimes()) {
                 hospitalProvider.getHospitalWaitingTimesAsync(hospital.getId());
@@ -88,9 +88,9 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
     }
 
     private void fillWaitingTimes() {
-        hospitalWaitingTimeGeneral.setText(hospital.getUrgencyWaitingTimeTextView("Geral"));
-        hospitalWaitingTimePeds.setText(hospital.getUrgencyWaitingTimeTextView("Pediatrica"));
-        hospitalWaitingTimeObstetrics.setText(hospital.getUrgencyWaitingTimeTextView("Obstetrica"));
+        hospitalWaitingTimeGeneral.setText(this.hospital.getUrgencyWaitingTimeTextView("Geral"));
+        hospitalWaitingTimePeds.setText(this.hospital.getUrgencyWaitingTimeTextView("Pediatrica"));
+        hospitalWaitingTimeObstetrics.setText(this.hospital.getUrgencyWaitingTimeTextView("Obstetrica"));
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -127,13 +127,46 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
         super.onDestroy();
     }
 
+    private String HOSPITAL_NAME = "HOSPITAL_NAME";
+    private String HOSPITAL_ADDRESS = "HOSPITAL_ADDRESS";
+    private String HOSPITAL_PHONE = "HOSPITAL_PHONE";
+    private String HOSPITAL_MAIL = "HOSPITAL_MAIL";
+    private String HOSPITAL_WEBSITE = "HOSPITAL_WEBSITE";
+    private String HOSPITAL_DISTANCE = "HOSPITAL_DISTANCE";
+
+    private String HOSPITAL_TIME_GENERAL = "HOSPITAL_TIME_GENERAL";
+    private String HOSPITAL_TIME_PEDS = "HOSPITAL_TIME_PEDS";
+    private String HOSPITAL_TIME_OBSTETRICS = "HOSPITAL_TIME_OBSTETRICS";
+
     @Override
     public void onRestoreInstanceState(Bundle savedInstance) {
         super.onRestoreInstanceState(savedInstance);
+
+        savedInstance.getString(HOSPITAL_NAME);
+        savedInstance.getString(HOSPITAL_ADDRESS);
+        savedInstance.getString(HOSPITAL_PHONE);
+        savedInstance.getString(HOSPITAL_MAIL);
+        savedInstance.getString(HOSPITAL_WEBSITE);
+        savedInstance.getString(HOSPITAL_DISTANCE);
+
+        savedInstance.getString(HOSPITAL_TIME_GENERAL);
+        savedInstance.getString(HOSPITAL_TIME_PEDS);
+        savedInstance.getString(HOSPITAL_TIME_OBSTETRICS);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+        outState.putString(hospitalName.toString(), HOSPITAL_NAME);
+        outState.putString(hospitalAddress.toString(), HOSPITAL_ADDRESS);
+        outState.putString(hospitalPhone.toString(), HOSPITAL_PHONE);
+        outState.putString(hospitalMail.toString(), HOSPITAL_MAIL);
+        outState.putString(hospitalWebSite.toString(), HOSPITAL_WEBSITE);
+        outState.putString(hospitalDistance.toString(), HOSPITAL_DISTANCE);
+
+        outState.putString(hospitalWaitingTimeGeneral.toString(), HOSPITAL_TIME_GENERAL);
+        outState.putString(hospitalWaitingTimePeds.toString(), HOSPITAL_TIME_PEDS);
+        outState.putString(hospitalWaitingTimeObstetrics.toString(), HOSPITAL_TIME_OBSTETRICS);
+
         super.onSaveInstanceState(outState);
     }
 

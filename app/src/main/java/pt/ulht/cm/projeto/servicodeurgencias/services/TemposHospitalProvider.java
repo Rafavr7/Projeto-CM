@@ -29,8 +29,8 @@ public class TemposHospitalProvider extends HospitalProviderAbstract {
     public static TemposHospitalProvider getInstance() {
         if(INSTANCE == null) {
             INSTANCE = new TemposHospitalProvider();
+    }
             INSTANCE.init();
-        }
 
         return INSTANCE;
     }
