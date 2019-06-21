@@ -10,7 +10,7 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
 public class VisitLog extends RealmObject {
-    private static final double MILISECINDS_TO_HOURS = 3600000.0;
+    private static final int MILISECONDS_TO_SECONDS = 1000;
 
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("dd/HH/yyyy");
     private static final DateFormat TIME_FORMAT = new SimpleDateFormat("HH:mm");
@@ -75,31 +75,33 @@ public class VisitLog extends RealmObject {
     }
 
     public String getElapsedTimeTextView() {
-        double time = elapsedTime.getTime() / MILISECINDS_TO_HOURS;
-        String textView = "";
+        double seconds = elapsedTime.getTime() / MILISECONDS_TO_SECONDS;
+        int minutes = (int) seconds / 60;
+        int hours = (int) seconds / 3600;
 
-        if(time < 1) {
-            int minutes = (int) (time * 60);
-            textView += minutes + " min";
+
+        if(hours > 0) {
+            int remainingMinutes = minutes - (hours * 60);
+            String textView = hours + "h " + remainingMinutes + " min";
             return textView;
         }
 
-        String horas = String.format("%.0f", time);
-        textView += horas + " horas";
+        String textView = minutes + " min";
         return textView;
     }
 
     public String getEntryTimeTextView() {
-        String date = DATE_FORMAT.format(entryTime);
         String time = TIME_FORMAT.format(entryTime);
-        String textView = date + " - " + time;
-        return textView;
+        return time;
     }
 
     public String getExitTimeTextView() {
-        String date = DATE_FORMAT.format(exitTime);
         String time = TIME_FORMAT.format(exitTime);
-        String textView = date + " - " + time;
-        return textView;
+        return time;
+    }
+
+    public String getVisitDateTextView() {
+        String date = DATE_FORMAT.format(entryTime);
+        return date;
     }
 }

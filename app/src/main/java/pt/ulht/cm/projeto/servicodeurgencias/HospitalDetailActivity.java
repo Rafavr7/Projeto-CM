@@ -175,6 +175,7 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
 
     public void doCheckIn(View view) {
         VisitLogController.getInstance().enterHospital(hospital.getListAdapterName());
+        Toast.makeText(this, "Bem vindo(a)!", Toast.LENGTH_LONG).show();
     }
 
     public void doGoing(View view) {
@@ -186,7 +187,7 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
 
         if(visit == null) {
             Toast.makeText(this, "Não pode fazer checkout de hospital sem ter feito" +
-                    "check-in no mesmo", Toast.LENGTH_LONG).show();
+                    " check-in no mesmo", Toast.LENGTH_LONG).show();
         }
         else {
             visitLogRealmProvider.addVisit(visit);

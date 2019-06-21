@@ -32,6 +32,12 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCeUxyK5YgXl5_8cFnmfOZm-4iyj5XZcA0</string>
     <string name="text_view_hospital_queue_obsteatria_placeholder">24min</string>
 
+    <string name="visit_list_item_hospital_name_placeholder">Hospital Santa Maria</string>
+    <string name="visit_list_item_entry_time_placeholder">Entrada: 12:34</string>
+    <string name="visit_list_item_exit_time_placeholder">Saída: 13:08</string>
+    <string name="visit_list_item_visit_date_placeholder">Data: 24/11/2018</string>
+    <string name="visit_list_item_elapsed_time_placeholder">Duração: 14 min</string>
+
     <string-array name="tipos_urgencia">
         <item>Geral</item>
         <item>Pediatria</item>

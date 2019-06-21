@@ -15,7 +15,6 @@ import pt.ulht.cm.projeto.servicodeurgencias.model.Hospital;
 public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapter.ViewHolder> implements IHospitalProvider.HospitalProviderObserver {
 
     private List<Hospital> hospitalDataSet;
-    private List<Hospital> filteredHospitalList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final View hospitalView;
