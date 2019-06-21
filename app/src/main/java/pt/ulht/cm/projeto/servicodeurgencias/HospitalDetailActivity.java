@@ -15,8 +15,11 @@ import java.util.List;
 
 import pt.ulht.cm.projeto.servicodeurgencias.model.Hospital;
 import pt.ulht.cm.projeto.servicodeurgencias.model.IHospitalProvider;
+import pt.ulht.cm.projeto.servicodeurgencias.model.VisitLog;
+import pt.ulht.cm.projeto.servicodeurgencias.model.VisitLogController;
 import pt.ulht.cm.projeto.servicodeurgencias.model.WaitingTime.WaitingTime;
 import pt.ulht.cm.projeto.servicodeurgencias.services.TemposHospitalProvider;
+import pt.ulht.cm.projeto.servicodeurgencias.services.VisitLogRealmProvider;
 
 public class HospitalDetailActivity extends AppCompatActivity implements IHospitalProvider.HospitalProviderObserver {
 
@@ -29,6 +32,7 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
                      hospitalWaitingTimeObstetrics;
 
     private TemposHospitalProvider hospitalProvider;
+    private VisitLogRealmProvider visitLogRealmProvider;
 
     @Override
     protected void onCreate(Bundle savedInstance) {
@@ -52,6 +56,7 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
         Log.d("CREATE_DETAIL", "Detail with id passed: " + hospitalID);
         if(hospitalID != null) {
             hospitalProvider = TemposHospitalProvider.getInstance();
+            visitLogRealmProvider = VisitLogRealmProvider.getInstance(this);
             // Find hospital
             hospital = hospitalProvider.getHospital(Integer.parseInt(hospitalID));
 
@@ -169,11 +174,24 @@ public class HospitalDetailActivity extends AppCompatActivity implements IHospit
     }
 
     public void doCheckIn(View view) {
+        VisitLogController.getInstance().enterHospital(hospital.getListAdapterName());
     }
 
     public void doGoing(View view) {
+        Toast.makeText(this, "A caminho do hospital!", Toast.LENGTH_SHORT).show();
     }
 
     public void doCheckOut(View view) {
+        VisitLog visit = VisitLogController.getInstance().exitHospital(hospital.getListAdapterName());
+
+        if(visit == null) {
+            Toast.makeText(this, "Não pode fazer checkout de hospital sem ter feito" +
+                    "check-in no mesmo", Toast.LENGTH_LONG).show();
+        }
+        else {
+            visitLogRealmProvider.addVisit(visit);
+            Toast.makeText(this, "Até a próxima!", Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
     }
 }
