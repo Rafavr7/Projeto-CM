@@ -55,14 +55,6 @@ public class VisitLogRealmProvider {
         visitLogData = new ArrayList<VisitLog>( visitLogRealmResults );
     }
 
-    public void beginTransaction() {
-        realm.beginTransaction();
-    }
-
-    public void commitTransaction() {
-        realm.commitTransaction();
-    }
-
     public void addVisit(VisitLog newVisitLog) {
         Log.d("REALM_ADD_VISIT", "Transaction Init for adding visitLog for hospital: " +
                 newVisitLog.getHospitalName());
@@ -74,6 +66,7 @@ public class VisitLogRealmProvider {
         Log.d("REALM_ADD_VISIT", "Commited new VisitLog");
 
         visitLogData.add(newVisitLog);
+        sortVisits();
     }
 
     public ArrayList<VisitLog> getVisits() {
